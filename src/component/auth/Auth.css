@@ -1,0 +1,80 @@
+/* Auth.css */
+
+.auth-container {
+  background-image: url('../../image/ofcRoomOg.jpg');
+  display: flex;
+justify-content: center;
+align-items: center;
+min-height: 80vh; /* Adjust the percentage to your preference */
+background-color: #f5f5f5;
+background-size: cover; /* Make the background image cover the container */
+background-position: center; /* Center the background image */
+}
+
+.auth-card {
+  background-image: url('../../image/ofcRoomOg.jpg');
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+input[type="numeric"],
+input[type="date"],
+input[type="text"],
+input[type="password"] {
+  width: 98%;
+  padding: 5px;
+  margin: 5px 0;
+  color: whitesmoke;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color:rgba(0, 0, 0, 0.397);
+}
+
+.login-button,
+.logout-button {
+  background-color: rgb(3, 144, 113);
+  color: #fff;
+  border: 2px solid black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.name-inputs {
+  display: flex; /* Display the inputs in a row */
+  gap: 10px; /* Add some spacing between inputs */
+}
+
+.switch-button {
+  background-color: rgb(3, 144, 113);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 10px;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  margin-top: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.login-button:hover,
+.logout-button:hover {
+  background-color: rgb(3, 164, 156);
+}
+
+.switch-button:hover{
+  background-color: rgb(2, 161, 153);
+}
