@@ -19,7 +19,7 @@ import ManageNotification from './component/notification/ManageNotification';
 function App() {
   const auth = useSelector(state => state.authReducer);
   const navigate = useNavigate();
-  const publicPaths = ["/passwordreset", "/resetpassword","/landingPage"];
+  const publicPaths = ["/passwordreset", "/resetpassword"];
   useEffect(() => {
     const currentPath = window.location.pathname;
     const requiresAuthentication = !publicPaths.includes(currentPath);
