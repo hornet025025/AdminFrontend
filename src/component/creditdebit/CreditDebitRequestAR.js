@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Radio, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, FormControl, RadioGroup, FormControlLabel, Paper, Typography } from '@mui/material';
+import { Radio, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, FormControl, RadioGroup, FormControlLabel, Paper, Typography, Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { acceptRejectRequest, getCreditDebitRequest } from '../../action/CreditDebitRequestARAction';
 
@@ -7,35 +7,63 @@ const CreditDebitRequestAR = () => {
   const [requestType, setRequestType] = useState('debit');
   const [searchTerm, setSearchTerm] = useState('');
   const dispatch = useDispatch();
+  const [transactionRequests, setTransactionRequest] = useState([]);
   const { creditDebitRequests, error } = useSelector((state) => state.creditDebitRequestReducer);
 
   useEffect(() => {
     fetchRequests();
   }, []);
 
+  useEffect(()=> {
+    setTransactionRequest(creditDebitRequests);
+  }, [creditDebitRequests])
+
   const fetchRequests = () => {
     dispatch(getCreditDebitRequest());
   };
 
+  const handleReload = () => {
+    window.location.reload();
+};
+
+
   const handleAccept = async (id) => {
     try {
-      dispatch(acceptRejectRequest({ transactionId: id, actionType: "ACCEPT" }))
-      fetchRequests(); // Refresh the list after accepting
+      dispatch(acceptRejectRequest({ transactionId: id, actionType: "ACCEPT" }));
+      window.location.reload();
     } catch (error) {
-      console.error(`Error accepting ${requestType} request:`, error);
+      return (
+        <Container>
+            <Typography variant="h6" color="error">
+                Error: {error}
+            </Typography>
+            <Button variant="contained" color="primary" onClick={handleReload}>
+                Reload
+            </Button>
+        </Container>
+       );
     }
   };
 
   const handleReject = async (id) => {
     try {
       dispatch(acceptRejectRequest({ transactionId: id, actionType: "REJECT" }))
-      fetchRequests(); // Refresh the list after rejecting
+      window.location.reload();
     } catch (error) {
-      console.error(`Error rejecting ${requestType} request:`, error);
+      return (
+        <Container>
+            <Typography variant="h6" color="error">
+                Error: {error}
+            </Typography>
+            <Button variant="contained" color="primary" onClick={handleReload}>
+                Reload
+            </Button>
+        </Container>
+       );
     }
   };
 
-  const filteredRequests = creditDebitRequests.filter(request =>
+  const filteredRequests = transactionRequests.filter(request =>
     ((requestType === 'debit' && request.transaction.transactionType === 'DEBIT') ||
       (requestType === 'credit' && request.transaction.transactionType === 'CREDIT')) &&
     `${request.customerDto.firstName} ${request.customerDto.middleName} ${request.customerDto.lastName}`.toLowerCase().includes(searchTerm.toLowerCase())
@@ -66,20 +94,27 @@ const CreditDebitRequestAR = () => {
               <TableCell>Date</TableCell>
               <TableCell>Transaction Id</TableCell>
               <TableCell>Bank Name</TableCell> 
+              <TableCell>Status</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredRequests.map((request) => (
-              <TableRow key={request.id}>
+              <TableRow key={request.transaction.id}>
                 <TableCell>{`${request.customerDto.firstName} ${request.customerDto.middleName} ${request.customerDto.lastName}`}</TableCell>
                 <TableCell>{request.transaction.transactionAmount}</TableCell>
                 <TableCell>{request.transaction.transactionDate}</TableCell>
                 <TableCell>{request.transaction.transactionId}</TableCell>
                 <TableCell>{request.transaction.bankName}</TableCell>
+                <TableCell>{request.transaction.requestStatus}</TableCell>
+                <TableCell>
+                      <span className={`badge ${
+                          request.transaction.requestStatus === 'APPROVED' ? 'bg-success' : 'bg-warning'
+                      }`}>{request.transaction.requestStatus}</span>
+                  </TableCell>
                 <TableCell>
                   <Button style={{ marginRight: '10px' }} variant="contained" color="primary" onClick={() => handleAccept(request.transaction.id)}>Accept</Button>
-                  <Button variant="contained" color="secondary" onClick={() => handleReject(request.id)}>Reject</Button>
+                  <Button variant="contained" color="secondary" onClick={() => handleReject(request.transaction.id)}>Reject</Button>
                 </TableCell>
               </TableRow>
             ))}

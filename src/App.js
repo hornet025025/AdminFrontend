@@ -5,7 +5,7 @@ import Home from './component/home/Home';
 import AddProfitLoss from './component/profitloss/AddProfitLoss';
 import CreditDebitRequestAR from './component/creditdebit/CreditDebitRequestAR';
 import ViewAllCustomer from './component/customer/ViewAllCustomer';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import ResetPassword from './component/auth/ResetPassword';
 import ForgotPassword from './component/auth/ForgotPassword'
@@ -16,15 +16,23 @@ import ViewTransaction from './component/customer/ViewTransaction';
 import ViewProfitLoss from './component/customer/ViewProfitLoss';
 import ManageNotification from './component/notification/ManageNotification';
 import ShiftAmountRequest from './component/shiftmoney/ShiftAmountRequest';
+import { SignIn } from './action/AuthAction';
 
 function App() {
   const auth = useSelector(state => state.authReducer);
   const navigate = useNavigate();
   const publicPaths = ["/passwordreset", "/resetpassword"];
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const currentPath = window.location.pathname;
     const requiresAuthentication = !publicPaths.includes(currentPath);
-    if (!auth.authenticate && requiresAuthentication)
+
+    if(!auth.authenticate && localStorage.getItem("token") != null) {
+      let user = JSON.parse(localStorage.getItem("user"));
+      dispatch(SignIn({ emailId: user.emailId, password: user.password }));
+    }
+    if (!auth.authenticate && requiresAuthentication && localStorage.getItem("token") == null)
       navigate('/auth');
   }, [auth.authenticate, navigate]);
   return (

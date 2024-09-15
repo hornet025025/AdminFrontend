@@ -2,7 +2,7 @@ import { ADD_PROFIT_FAILED, ADD_PROFIT_SUCESS, ADD_PROFIT_RESET } from "../const
 
   
   const intialState={
-      sucessMessage:null,
+    successMessage:null,
       error:null,
   };
   
@@ -11,14 +11,14 @@ import { ADD_PROFIT_FAILED, ADD_PROFIT_SUCESS, ADD_PROFIT_RESET } from "../const
         case ADD_PROFIT_SUCESS:
           console.log(`Signinup ${action.type}`)
             state = {
-                sucessMessage:action.payload.data,
+              successMessage:action.payload.data,
                 error:null
             };
           break;  
         case ADD_PROFIT_FAILED:
             state = {
                 error:action.payload.error,
-                sucessMessage:null
+                successMessage:null
             };
             break;
         case ADD_PROFIT_RESET:

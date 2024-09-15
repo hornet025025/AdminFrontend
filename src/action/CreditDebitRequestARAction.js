@@ -1,9 +1,9 @@
-import { ACCEPT_REJECT_CREDIT_DEBIT_FAILED, ACCEPT_REJECT_CREDIT_DEBIT_SUCESS, FETCH_TRANSACTION_BY_USER_ID_FAILED, FETCH_TRANSACTION_BY_USER_ID_SUCESS, GET_CREDIT_DEBIT_FAILED, GET_CREDIT_DEBIT_SUCESS } from "../constant"
+import { ACCEPT_REJECT_CREDIT_DEBIT_FAILED, ACCEPT_REJECT_CREDIT_DEBIT_SUCESS, BASE_URL, FETCH_TRANSACTION_BY_USER_ID_FAILED, FETCH_TRANSACTION_BY_USER_ID_SUCESS, GET_CREDIT_DEBIT_FAILED, GET_CREDIT_DEBIT_SUCESS } from "../constant"
 import { axiosAuth } from "./axios"
 
 export const getCreditDebitRequest  = () => async (dispatch)=> {
     try {
-        const data = await axiosAuth().get(`api/transaction/requested/credit/debit`);
+        const data = await axiosAuth().get(`api/transaction/alltransaction`);
         console.log(data)
         dispatch({
             type: GET_CREDIT_DEBIT_SUCESS, payload: {

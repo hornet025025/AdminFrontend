@@ -15,11 +15,12 @@ import { fetchShiftAmountRequest, approveShift, rejectShift } from '../../action
 const ShiftAmountRequest = () => {
     const dispatch = useDispatch();
     const { loading, shiftAmounts, error } = useSelector((state) => state.shifts);
-    const auth = useSelector((state) => state.authReducer)
-
+    
     useEffect(() => {
-        dispatch(fetchShiftAmountRequest(auth.user.id));
-    }, [dispatch, shiftAmounts]);
+        let user = JSON.parse(localStorage.getItem("user"))
+        console.log(user.id);
+        dispatch(fetchShiftAmountRequest(user.id));
+    }, [dispatch]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -35,10 +36,12 @@ const ShiftAmountRequest = () => {
 
     const handleApprove = (shiftId) => {
         dispatch(approveShift(shiftId));
+        window.location.reload();
     };
 
     const handleReject = (shiftId) => {
         dispatch(rejectShift(shiftId));
+        window.location.reload();
     };
 
     const renderTooltip = (text) => (

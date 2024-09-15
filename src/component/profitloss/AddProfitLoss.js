@@ -9,38 +9,52 @@ const AddProfitLoss = () => {
     const [tradeCategory, setTradeCategory] = useState('');
     const [profitLoss, setProfitLoss] = useState(''); 
     const [percentage, setPercentage] = useState(''); 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch();                                
     const { successMessage, error } = useSelector((state) => state.addProfitLossReducer);
     const navigate = useNavigate();
 
     const handleReload = () => {
         dispatch(resetProfitLossReducer());
+        setProfitLoss('')
+        setPercentage('')
     };
 
-    const showError = () => {
-      return (
-        <Container>
-          <Typography variant="h6" color="error">
-              Error: {error}
-          </Typography>
-          <Button variant="contained" color="primary" onClick={handleReload}>
-              Reload
-          </Button>
-      </Container>
-      );
-    }
-
-    useEffect(() => {
-        if (successMessage) {
-            alert(successMessage);
-            dispatch(resetProfitLossReducer());
-            navigate('/home');
-        }
+    const handleReopen = () => {
+        dispatch(resetProfitLossReducer());
+        setProfitLoss('')
+        setPercentage('')
+        navigate('/add-profit-loss')
+    };
+    
         if (error) {
-            alert(error);
-            showError()
+            return (
+                <Container>
+                    <Typography variant="h6" color="error">
+                        Error: {error}
+                    </Typography>
+                    <Button variant="contained" color="primary" onClick={handleReload}>
+                        Reload
+                    </Button>
+                </Container>
+            );
         }
-    }, [successMessage, error, dispatch, navigate]);
+    
+        if (successMessage) {
+            return (
+                <Container>
+                    <Typography variant="h6" color="success">
+                        Success: {successMessage}
+                    </Typography>
+                    <Typography variant="h6" gutterBottom>
+                       Reopen to Add more Profit Loss
+                    </Typography>
+                    <Button variant="contained" color="primary" onClick={handleReopen}>
+                          Reopen
+                    </Button>
+                </Container>
+            );
+        }
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -49,6 +63,7 @@ const AddProfitLoss = () => {
             profitLoss: profitLoss,
             profitLossPercent: percentage
         }));
+        console.log(successMessage)
     };
 
     // Function to handle category selection
