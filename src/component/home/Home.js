@@ -28,6 +28,11 @@ const Home = () => {
                     <p>Add notification and remove notification.</p>
                     <Link to="/notificationManager" className="btn">Go</Link>
                 </div>
+                <div className="block">
+                    <h2>Shift Amount Request Manager</h2>
+                    <p>Accept & Reject shift amount  request.</p>
+                    <Link to="/shiftamountrequestManager" className="btn">Go</Link>
+                </div>
             </div>
         </div>
     );

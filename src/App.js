@@ -15,6 +15,7 @@ import ViewTradeCategoryBalance from './component/customer/ViewTradeCategoryBala
 import ViewTransaction from './component/customer/ViewTransaction';
 import ViewProfitLoss from './component/customer/ViewProfitLoss';
 import ManageNotification from './component/notification/ManageNotification';
+import ShiftAmountRequest from './component/shiftmoney/ShiftAmountRequest';
 
 function App() {
   const auth = useSelector(state => state.authReducer);
@@ -41,6 +42,7 @@ function App() {
        <Route path='/user/:userId/transactions' element={<ViewTransaction />} />
        <Route path='/user/:userId/profit-loss-details' element={<ViewProfitLoss />} />
        <Route path='/notificationManager' element={<ManageNotification />}  />
+       <Route path='/shiftamountrequestManager' element={<ShiftAmountRequest />} />
     </Routes>
     <Footer />
     </>

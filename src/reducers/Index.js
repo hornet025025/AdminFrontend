@@ -7,6 +7,7 @@ import { passwordResetReducer } from './ForgotPasswordReducer';
 import tradeCategoryBalanceReducer from "./TradeCategoryBalanceReducer";
 import profitLossReducer from "./ProfitLossReducer";
 import notificationReducer from "./NotificationReducer";
+import shiftAmountRequestReducer from "./ShiftAmountRequestReducer";
 
 const reducers = combineReducers({
     authReducer,
@@ -16,7 +17,8 @@ const reducers = combineReducers({
     passwordResetReducer,
     tradeCategoryBalanceReducer,
     profitLossReducer,
-    notificationReducer
+    notificationReducer,
+    shifts: shiftAmountRequestReducer
 });
 
 export default reducers
