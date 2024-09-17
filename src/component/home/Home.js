@@ -9,12 +9,12 @@ const Home = () => {
             <h1>Welcome to Admin Panel</h1>
             <div className="grid block-container rounded-lg mt-2 ml-4 mr-4 mb-2">
                 <div className="block1">
-                    <h2>Add Trading Profit/Loss</h2>
+                    <h2>Add Profit/Loss</h2>
                     <p>View and add profits or losses to trades.</p>
                     <Link to="/add-profit-loss" className="btn">Go</Link>
                 </div>
                 <div className="block1">
-                    <h2>Accept Debit Requests</h2>
+                    <h2>Accept Debit/Credit Requests</h2>
                     <p>View and accept pending debit requests.</p>
                     <Link to="/creditDebiRequestAC" className="btn">Go</Link>
                 </div>
@@ -28,10 +28,15 @@ const Home = () => {
                     <p>Add notification and remove notification.</p>
                     <Link to="/notificationManager" className="btn">Go</Link>
                 </div>
-                <div className="block">
-                    <h2>Shift Amount Request Manager</h2>
+                <div className="block1">
+                    <h2>Shift Amount Request</h2>
                     <p>Accept & Reject shift amount  request.</p>
                     <Link to="/shiftamountrequestManager" className="btn">Go</Link>
+                </div>
+                <div className="block1">
+                    <h2>Query resolutiont</h2>
+                    <p> Resolve the customer query.</p>
+                    <Link to="/query" className="btn">Go</Link>
                 </div>
             </div>
         </div>

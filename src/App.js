@@ -16,7 +16,8 @@ import ViewTransaction from './component/customer/ViewTransaction';
 import ViewProfitLoss from './component/customer/ViewProfitLoss';
 import ManageNotification from './component/notification/ManageNotification';
 import ShiftAmountRequest from './component/shiftmoney/ShiftAmountRequest';
-import { SignIn } from './action/AuthAction';
+import { SignIn, logoutUser } from './action/AuthAction';
+import QueryResolution from './component/query/QueryResolution';
 
 function App() {
   const auth = useSelector(state => state.authReducer);
@@ -26,17 +27,32 @@ function App() {
 
   useEffect(() => {
     const currentPath = window.location.pathname;
+    console.log(currentPath)
     const requiresAuthentication = !publicPaths.includes(currentPath);
-
-    if(!auth.authenticate && localStorage.getItem("token") != null) {
+    if(currentPath == "/") navigate('/auth');
+    if(!auth.authenticate && localStorage.getItem("user") != null) {
+      console.log(localStorage.getItem("user"))
       let user = JSON.parse(localStorage.getItem("user"));
       dispatch(SignIn({ emailId: user.emailId, password: user.password }));
     }
     if (!auth.authenticate && requiresAuthentication && localStorage.getItem("token") == null)
       navigate('/auth');
   }, [auth.authenticate, navigate]);
+
+  const handleLogout = async () => {
+    // Dispatch the logout action
+    await dispatch(logoutUser());
+    // Then navigate to the auth page
+    navigate('/auth');
+};
+
   return (
     <>
+    {window.location.pathname !== "/auth" && (
+      <div style={{ textAlign: 'right', padding: '10px', backgroundColor: '#f8f9fa' }}>
+          <button onClick={handleLogout} className="btn-logout">Logout</button>
+      </div>
+    )}
     <Routes>
        <Route path="/auth" element={<Auth />} />
        <Route path="/passwordreset" element={<ForgotPassword />} />
@@ -51,6 +67,7 @@ function App() {
        <Route path='/user/:userId/profit-loss-details' element={<ViewProfitLoss />} />
        <Route path='/notificationManager' element={<ManageNotification />}  />
        <Route path='/shiftamountrequestManager' element={<ShiftAmountRequest />} />
+       <Route path='/query' element={<QueryResolution />} />
     </Routes>
     <Footer />
     </>

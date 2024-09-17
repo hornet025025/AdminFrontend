@@ -8,6 +8,7 @@ import tradeCategoryBalanceReducer from "./TradeCategoryBalanceReducer";
 import profitLossReducer from "./ProfitLossReducer";
 import notificationReducer from "./NotificationReducer";
 import shiftAmountRequestReducer from "./ShiftAmountRequestReducer";
+import { queryResolutionReducer } from './QueryResolutionReducer';
 
 const reducers = combineReducers({
     authReducer,
@@ -18,7 +19,8 @@ const reducers = combineReducers({
     tradeCategoryBalanceReducer,
     profitLossReducer,
     notificationReducer,
-    shifts: shiftAmountRequestReducer
+    shifts: shiftAmountRequestReducer,
+    queryResolutionReducer
 });
 
 export default reducers

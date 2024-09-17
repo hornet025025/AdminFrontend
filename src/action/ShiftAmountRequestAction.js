@@ -31,7 +31,7 @@ export const fetchShiftAmountRequest = userId  => {
         dispatch(fetchShiftRequest());
         try {
             // Replace this URL with your actual API endpoint
-            const response = await axiosAuth().get(`api/tcbalance/shift/amount/all/${userId}`);
+            const response = await axiosAuth().get(`api/tcbalance/shift/amount/all`);
             dispatch(fetchShiftSuccess(response.data));
         } catch (error) {
             dispatch(fetchShiftFailure(error.message));

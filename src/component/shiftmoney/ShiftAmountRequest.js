@@ -19,7 +19,7 @@ const ShiftAmountRequest = () => {
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem("user"))
         console.log(user.id);
-        dispatch(fetchShiftAmountRequest(user.id));
+        dispatch(fetchShiftAmountRequest());
     }, [dispatch]);
 
     const [page, setPage] = useState(0);
