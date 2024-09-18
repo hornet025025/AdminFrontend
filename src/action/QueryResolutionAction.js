@@ -31,7 +31,7 @@ export const fetchQuery = () => async (dispatch) => {
 export const resolveQuery = (queryId, resolution) => async (dispatch) => {
     dispatch(resolveQueryRequest());
     try {
-        const response = await axiosAuth().put(`/api/queryticket/${queryId}/resolve`, { resolution });
+        const response = await axiosAuth().post(`/api/queryticket/${queryId}/resolve`, resolution);
         dispatch(resolveQuerySuccess("Query resolved successfully"));
     } catch (error) {
         dispatch(resolveQueryFailure(error.message));
