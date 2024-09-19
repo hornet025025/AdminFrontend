@@ -70,7 +70,7 @@ const CreditDebitRequestAR = () => {
   );
 
   return (
-    <div style={{ width: '90%', margin: 'auto', marginTop: '20px' }}>
+    <div className="bg-white rounded-lg mt-2 ml-4 mr-4 mb-2"style={{ width: '90%', margin: 'auto', marginTop: '20px' }}>
       <Typography variant="h4" align='center' gutterBottom>Debit/Credit Requests</Typography>
       <FormControl component="fieldset" style={{ marginBottom: '20px' }}>
         <RadioGroup row value={requestType} onChange={(e) => setRequestType(e.target.value)}>
