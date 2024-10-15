@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:8081/"
+export const BASE_URL = "https://customer-management-production-ab.up.railway.app/"
 
 export const SIGN_UP_IN_FAILURE = 'SIGN_UP_IN_FAILURE'
 export const SIGN_IN_UP = 'SIGN_IN_UP'
